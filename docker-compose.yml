@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql57_kuflinkcom
+    command: --max_allowed_packet=1GB
+    restart: always
+    environment:
+      MYSQL_DATABASE: wp_r4u1p
+      MYSQL_USER: wp_r4u1p
+      MYSQL_PASSWORD: api
+      MYSQL_ROOT_PASSWORD: api
+    ports:
+      - "3371:3306"
+    volumes:
+      - mysql_data_five_seven_kuflinkcom:/var/lib/mysql
+
+volumes:
+  mysql_data_five_seven_kuflinkcom:
